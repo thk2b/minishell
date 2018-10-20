@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 22:27:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 23:00:59 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/20 16:46:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int		find_builtin(const char **argv, const char **env)
 {
 	static t_builtin	builtins[] = {
+		{ "echo", builtin_echo },
 		{ "cd", builtin_cd },
 		{ NULL, NULL}
 	};
