@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 21:09:14 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 21:50:56 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static int	is_executable(const char *path, const char *basename)
 	return (0);
 }
 
-static char	*find_exec_path(const char **env, const char *name)
+char		**parse_path(const char **env)
 {
+	char	**path;
 	int		pi;
-	int		pj;
-	char	**path; // TODO: without malloc
-	char	*exec_path;
 
 	pi = 0;
+	path = NULL;
 	while (env[pi])
 		if (ft_strstr(env[pi], "PATH="))
 			break ;
@@ -45,20 +44,47 @@ static char	*find_exec_path(const char **env, const char *name)
 		error("cannot find PATH environment variable", NULL, 0);
 	else if ((path = ft_strsplit(env[pi], ':')) == NULL)
 		error("cannot split path", NULL, 0);
-	else
+	return (path);
+}
+
+static char	*find_exec_in_path(char **path, const char *name)
+{
+	int		pj;
+	char	*tmp;
+	char	*exec_path;
+
+	pj = 0;
+	while (path[pj])
+		if (is_executable(path[pj], name))
+		{
+			exec_path = ft_strcjoin(path[pj], '/', name);
+			free(path);
+			return (exec_path);
+		}
+		else
+			pj++;
+	tmp = ft_strdup(".");
+	if(is_executable(tmp, name))
 	{
-		pj = 0;
-		while (path[pj])
-			if (is_executable(path[pj], name))
-			{
-				exec_path = ft_strcjoin(path[pj], '/', name);
-				free(path);
-				return (exec_path);
-			}
-			else
-				pj++;
+		exec_path = ft_strcjoin(tmp, '/', name);
+		free(path);
+		return (exec_path);
 	}
+	else
+		free(tmp);
 	return (NULL);
+}
+
+static char	*find_exec(const char **env, const char *name)
+{
+	char	**path; // TODO: without malloc
+	char	*exec_path;
+
+	if ((path = parse_path(env)) == NULL)
+		return (NULL);
+	if ((exec_path = find_exec_in_path(path, name)) == NULL)
+		return (NULL);
+	return (exec_path);
 }
 
 int			eval_command(const char **env, const char **command)
@@ -67,7 +93,7 @@ int			eval_command(const char **env, const char **command)
 	pid_t	child_pid;
 	int		stat;
 
-	if ((exec_path = find_exec_path(env, command[0])) == NULL)
+	if ((exec_path = find_exec(env, command[0])) == NULL)
 		return (error("command not found", command[0], 1));
 	if ((child_pid = fork()) == -1)
 	{
