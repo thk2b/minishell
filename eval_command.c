@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 21:50:56 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 22:55:07 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ static char	*find_exec_in_path(char **path, const char *name)
 
 static char	*find_exec(const char **env, const char *name)
 {
-	char	**path; // TODO: without malloc
-	char	*exec_path;
+	char		**path; // TODO: without malloc
+	char		*exec_path;
 
 	if ((path = parse_path(env)) == NULL)
 		return (NULL);
-	if ((exec_path = find_exec_in_path(path, name)) == NULL)
+	 if ((exec_path = find_exec_in_path(path, name)) == NULL)
 		return (NULL);
 	return (exec_path);
 }
@@ -93,6 +93,8 @@ int			eval_command(const char **env, const char **command)
 	pid_t	child_pid;
 	int		stat;
 
+	if (find_builtin(command, env) == 0)
+		return (0);
 	if ((exec_path = find_exec(env, command[0])) == NULL)
 		return (error("command not found", command[0], 1));
 	if ((child_pid = fork()) == -1)

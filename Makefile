@@ -11,6 +11,8 @@ SRC =\
 	prompt.c\
 	read_command.c\
 	eval_command.c\
+	builtins.c\
+	builtin_cd.c\
 	main.c\
 
 OBJ = $(SRC:.c=.o)

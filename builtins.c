@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 21:02:04 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:38:07 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/19 22:27:07 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/19 22:52:47 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# define PROMPT "<$> "
-# define PROMPT_LEN 4
+#include "minishell.h"
+#include "builtins.h"
+#include "libft.h"
 
+int		builtin_cd(const char **argv, const char **env);
+int		find_builtin(const char **argv, const char **env)
+{
+	static t_builtin builtins[] = {
+		{ "cd", builtin_cd },
+		{ NULL, NULL}
+	};
+	int i;
 
-int			error(const char *predicate, const char *subject, int ret);
-int			prompt();
-char		**read_command();
-int			eval_command(const char **env, const char **command);
-int			find_builtin(const char **env, const char **command);
-
-#endif
+	i = 0;
+	while (builtins[i].name)
+		if (ft_strcmp(builtins[i++].name, argv[0]) == 0)
+			return (builtin_cd(argv, env));
+	return (1);
+}

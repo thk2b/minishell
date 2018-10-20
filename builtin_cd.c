@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 21:02:04 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:38:07 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/19 22:44:38 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/19 22:57:15 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# define PROMPT "<$> "
-# define PROMPT_LEN 4
+#include "builtins.h"
+#include <unistd.h>
 
-
-int			error(const char *predicate, const char *subject, int ret);
-int			prompt();
-char		**read_command();
-int			eval_command(const char **env, const char **command);
-int			find_builtin(const char **env, const char **command);
-
-#endif
+int		builtin_cd(const char **argv, const char **env)
+{
+	(void)env;
+	if (argv[1] == NULL)
+		return (chdir(".."));
+	return (chdir(argv[1]));
+}

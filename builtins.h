@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 21:02:04 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:38:07 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/19 22:37:11 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/19 22:52:33 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# define PROMPT "<$> "
-# define PROMPT_LEN 4
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-
-int			error(const char *predicate, const char *subject, int ret);
-int			prompt();
-char		**read_command();
-int			eval_command(const char **env, const char **command);
+typedef int				(*t_builtin_fn)(const char **argv, const char **env);
+typedef struct	s_builtin {
+	char			*name;
+	t_builtin_fn	fn;
+}				t_builtin;
 int			find_builtin(const char **env, const char **command);
 
 #endif
