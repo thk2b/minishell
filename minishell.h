@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 21:02:04 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:38:07 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 22:59:22 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 # define PROMPT "<$> "
 # define PROMPT_LEN 4
 
-
 int			error(const char *predicate, const char *subject, int ret);
 int			prompt();
 char		**read_command();
 int			eval_command(const char **env, const char **command);
-int			find_builtin(const char **env, const char **command);
 
 #endif
