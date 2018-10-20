@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   read_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 18:40:23 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 19:08:57 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/19 19:06:30 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/19 19:17:47 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# define PROMPT "<$>"
-# define PROMPT_LEN 3
+#include "minishell.h"
+#include "libft.h"
+#include "get_next_line.h"
 
-int		prompt();
-char	**read_command();
-int		eval_command(char **cmd);
+char	**read_command()
+{
+	char	*line;
+	char	**command;
 
-#endif
+	if (get_next_line(1, &line) <= 0)
+		return (NULL);
+	command = ft_strsplit(line, ' ');
+	return (command);
+}

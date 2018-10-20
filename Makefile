@@ -4,17 +4,23 @@ LIBFT = libft/libft.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 HEAD = minishell.h
-INCLUDES = libft/includes
+INCLUDES = -I libft/includes
 
 SRC =\
-	main.c
+	prompt.c\
+	read_command.c\
+	eval_command.c\
+	main.c\
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
+$(LIBFT):
+	make -C libft
+
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEAD)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
