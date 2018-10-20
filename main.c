@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:40:25 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 19:17:00 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 19:47:39 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int		main(int ac, char **av)
 	while (1)
 	{
 		prompt();
-		command = read_command();
+		if ((command = read_command()) == NULL)
+		{
+			error("cannot parse command", NULL, 0);
+			continue;
+		}
 		eval_command(command);
 		free(command);
 	}

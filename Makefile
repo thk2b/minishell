@@ -7,6 +7,7 @@ HEAD = minishell.h
 INCLUDES = -I libft/includes
 
 SRC =\
+	error.c\
 	prompt.c\
 	read_command.c\
 	eval_command.c\

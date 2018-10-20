@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 18:40:23 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 19:45:29 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/19 19:39:02 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/19 19:41:41 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# define PROMPT "<$>"
-# define PROMPT_LEN 3
-# define MCK(addr, ret) (if (!addr) return (ret))
+#include "minishell.h"
+#include "libft.h"
 
-int		error(const char *msg, const char *cmd, int ret);
-int		prompt();
-char	**read_command();
-int		eval_command(char **cmd);
-
-#endif
+int		error(const char *msg, const char *cmd, int ret)
+{
+	ft_putstr("minishell: ");
+	if (cmd)
+	{
+		ft_putstr(cmd);
+		ft_putchar(':');
+	}
+	ft_putendl(msg);
+	return (ret);
+}
