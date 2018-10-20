@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:06:30 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 20:09:32 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 23:01:41 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-char	**read_command()
+char	**read_command(void)
 {
 	char	*line;
 	char	**command;

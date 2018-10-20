@@ -6,14 +6,14 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:56:54 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 19:03:50 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 23:01:12 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <unistd.h>
 
-int		prompt()
+int		prompt(void)
 {
 	return (write(1, PROMPT, PROMPT_LEN) == PROMPT_LEN);
 }

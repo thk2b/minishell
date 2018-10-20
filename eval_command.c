@@ -6,11 +6,12 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:55:07 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 23:03:28 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 #include "libft.h"
 #include <printf.h>
 #include <unistd.h>
@@ -64,7 +65,7 @@ static char	*find_exec_in_path(char **path, const char *name)
 		else
 			pj++;
 	tmp = ft_strdup(".");
-	if(is_executable(tmp, name))
+	if (is_executable(tmp, name))
 	{
 		exec_path = ft_strcjoin(tmp, '/', name);
 		free(path);
@@ -82,7 +83,7 @@ static char	*find_exec(const char **env, const char *name)
 
 	if ((path = parse_path(env)) == NULL)
 		return (NULL);
-	 if ((exec_path = find_exec_in_path(path, name)) == NULL)
+	if ((exec_path = find_exec_in_path(path, name)) == NULL)
 		return (NULL);
 	return (exec_path);
 }
@@ -105,8 +106,6 @@ int			eval_command(const char **env, const char **command)
 	else if (child_pid == 0)
 	{
 		execve(exec_path, (char *const*)command, (char**)env);
-		free(exec_path);
-		exit(0);
 	}
 	else
 	{

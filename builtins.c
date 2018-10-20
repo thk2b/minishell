@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 22:27:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:52:47 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 23:00:59 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include "builtins.h"
 #include "libft.h"
 
-int		builtin_cd(const char **argv, const char **env);
 int		find_builtin(const char **argv, const char **env)
 {
-	static t_builtin builtins[] = {
+	static t_builtin	builtins[] = {
 		{ "cd", builtin_cd },
 		{ NULL, NULL}
 	};
-	int i;
+	int					i;
 
 	i = 0;
 	while (builtins[i].name)

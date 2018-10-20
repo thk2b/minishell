@@ -6,18 +6,19 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 22:37:11 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:52:33 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/19 23:02:04 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-typedef int				(*t_builtin_fn)(const char **argv, const char **env);
+typedef int		(*t_builtin_fn)(const char **argv, const char **env);
 typedef struct	s_builtin {
 	char			*name;
 	t_builtin_fn	fn;
 }				t_builtin;
-int			find_builtin(const char **env, const char **command);
+int				builtin_cd(const char **argv, const char **env);
+int				find_builtin(const char **env, const char **command);
 
 #endif
