@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplit_escape.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 21:00:30 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 18:45:47 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/20 18:47:55 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,58 @@ static char		*alloc_str(const char *start, const char *end)
 	return (s);
 }
 
-static char		**alloc_splits(const char *s, char c)
+static char		**alloc_splits(const char *s, char c, const char *escape)
 {
 	size_t	count;
+	int		escaping;
 
 	count = 1;
+	escaping = 0;
+	if (ft_strchr(escape, *s))
+	{
+		escaping = 1;
+		s++;
+	}
 	if (*s == c)
 		s++;
 	while (*s)
-		if (*s++ == c && *s && *s != c)
+	{
+		if (ft_strchr(escape, *s))
+		{
+			if (!escaping)
+				count++;
+			escaping = !escaping;
+		}
+		else if (escaping)
+			;
+		else if (*s == c && *s && s[1] != c)
 			count++;
+		s++;
+	}
 	return ((char**)malloc(count * sizeof(char**)));
 }
 
-char			**ft_strsplit(const char *s, char c)
+char			**ft_strsplit_escape(const char *s, char c, const char *escape)
 {
 	const char	*t;
+	const char	*e;
 	char		**strv;
 	size_t		i;
 
 	t = s;
 	i = 0;
-	if ((strv = alloc_splits(s, c)) == NULL)
+	if ((strv = alloc_splits(s, c, escape)) == NULL)
 		return (NULL);
 	while (s && *s)
 	{
-		if ((t = ft_strchr(s, (int)c)) == NULL)
+		if ((e = ft_strchr(escape, *s)))
+		{
+			if ((t = ft_strchr(++s, *e)) == NULL)
+				strv[i++] = alloc_str(s, s + ft_strlen(s));
+			else
+				strv[i++] = alloc_str(s, t++);
+		}
+		else if ((t = ft_strchr(s, (int)c)) == NULL)
 			strv[i++] = alloc_str(s, s + ft_strlen(s));
 		else
 		{

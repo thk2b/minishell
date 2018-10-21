@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 23:36:48 by tkobb             #+#    #+#             */
-/*   Updated: 2018/09/22 15:27:42 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/20 18:46:50 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(const char *s);
 char			**ft_strsplit(const char *s, char c);
+char			**ft_strsplit_escape(const char *s, char c, const char *escape);
 char			*ft_itoa(int n);
 void			ft_putchar(char c);
 void			ft_putstr(const char *s);

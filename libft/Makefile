@@ -28,6 +28,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	ft_atoi.c\
 	ft_strtrim.c\
 	ft_strsplit.c\
+	ft_strsplit_escape.c\
 	ft_isalpha.c\
 	ft_isdigit.c\
 	ft_isalnum.c\
