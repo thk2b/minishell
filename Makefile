@@ -13,6 +13,7 @@ SRC =\
 	eval_command.c\
 	builtin_echo.c\
 	builtin_cd.c\
+	builtin_env.c\
 	builtins.c\
 	main.c\
 

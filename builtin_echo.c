@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 22:27:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 20:49:09 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/20 16:46:59 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/20 16:51:01 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "builtins.h"
 #include "libft.h"
+#include <unistd.h>
 
-int		find_builtin(const char **argv, const char **env)
+int		builtin_echo(const char **argv, const char **env)
 {
-	static t_builtin	builtins[] = {
-		{ "echo", builtin_echo },
-		{ "cd", builtin_cd },
-		{ "env", builtin_env },
-		{ NULL, NULL}
-	};
-	int					i;
+	int		i;
+	ssize_t	status;
+	(void)env;
 
 	i = 0;
-	while (builtins[i].name)
-		if (ft_strcmp(builtins[i].name, argv[0]) == 0)
-			return (builtins[i].fn(argv, env));
-		else
-			i++;
-	return (1);
+	status = 0;
+	while (argv[i])
+	{
+		status = write(1, argv[i], ft_strlen(argv[i]));
+		status += write(1, "\n", 1);
+		if (status <= 0)
+			return(1);
+	}
+	return (0);
 }
