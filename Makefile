@@ -34,7 +34,7 @@ clean:
 	make clean -C libft
 	rm -f $(OBJ)
 
-fclean:
+fclean: clean
 	make fclean -C libft
 	rm -f $(NAME)
 

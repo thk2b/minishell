@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 21:02:04 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 22:59:22 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 15:09:45 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 int			error(const char *predicate, const char *subject, int ret);
 int			prompt();
 char		**read_command();
-int			eval_command(const char **env, const char **command);
+int			eval_command(const char **command, char **env);
 
 #endif

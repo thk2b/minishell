@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 16:46:59 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 16:51:01 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 15:23:57 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include "libft.h"
 #include <unistd.h>
 
-int		builtin_echo(const char **argv, const char **env)
+int		builtin_echo(const char **argv)
 {
 	int		i;
 	ssize_t	status;
-	(void)env;
 
 	i = 0;
 	status = 0;

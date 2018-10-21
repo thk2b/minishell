@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 23:03:28 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 15:11:29 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_executable(const char *path, const char *basename)
 	return (0);
 }
 
-char		**parse_path(const char **env)
+char		**parse_path(char **env)
 {
 	char	**path;
 	int		pi;
@@ -76,7 +76,7 @@ static char	*find_exec_in_path(char **path, const char *name)
 	return (NULL);
 }
 
-static char	*find_exec(const char **env, const char *name)
+static char	*find_exec(char **env, const char *name)
 {
 	char		**path; // TODO: without malloc
 	char		*exec_path;
@@ -88,7 +88,7 @@ static char	*find_exec(const char **env, const char *name)
 	return (exec_path);
 }
 
-int			eval_command(const char **env, const char **command)
+int			eval_command(const char **command, char **env)
 {
 	char	*exec_path;
 	pid_t	child_pid;
@@ -105,7 +105,7 @@ int			eval_command(const char **env, const char **command)
 	}
 	else if (child_pid == 0)
 	{
-		execve(exec_path, (char *const*)command, (char**)env);
+		execve(exec_path, (char *const*)command, env);
 	}
 	else
 	{

@@ -6,14 +6,16 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:40:25 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 20:09:49 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 15:45:06 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdlib.h>
+#include <printf.h>
 
-int		main(int ac, const char **av, const char **env)
+extern char	**environ;
+int			main(int ac, const char **av)
 {
 	const char	**command;
 
@@ -27,7 +29,7 @@ int		main(int ac, const char **av, const char **env)
 			error("cannot parse command", NULL, 0);
 			continue;
 		}
-		eval_command(env, command);
+		eval_command(command, environ);
 		free(command);
 	}
 }
