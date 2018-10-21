@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:11:29 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 16:41:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <limits.h>
 
+extern char	**environ;
 static int	is_executable(const char *path, const char *basename)
 {
 	char	execpath[PATH_MAX];
@@ -29,21 +30,21 @@ static int	is_executable(const char *path, const char *basename)
 	return (0);
 }
 
-char		**parse_path(char **env)
+char		**parse_path(void)
 {
 	char	**path;
 	int		pi;
 
 	pi = 0;
 	path = NULL;
-	while (env[pi])
-		if (ft_strstr(env[pi], "PATH="))
+	while (environ[pi])
+		if (ft_strstr(environ[pi], "PATH="))
 			break ;
 		else
 			pi++;
-	if (env[pi] == NULL)
+	if (environ[pi] == NULL)
 		error("cannot find PATH environment variable", NULL, 0);
-	else if ((path = ft_strsplit(env[pi], ':')) == NULL)
+	else if ((path = ft_strsplit(environ[pi], ':')) == NULL)
 		error("cannot split path", NULL, 0);
 	return (path);
 }
@@ -76,27 +77,27 @@ static char	*find_exec_in_path(char **path, const char *name)
 	return (NULL);
 }
 
-static char	*find_exec(char **env, const char *name)
+static char	*find_exec(const char *name)
 {
 	char		**path; // TODO: without malloc
 	char		*exec_path;
 
-	if ((path = parse_path(env)) == NULL)
+	if ((path = parse_path()) == NULL)
 		return (NULL);
 	if ((exec_path = find_exec_in_path(path, name)) == NULL)
 		return (NULL);
 	return (exec_path);
 }
 
-int			eval_command(const char **command, char **env)
+int			eval_command(const char **command)
 {
 	char	*exec_path;
 	pid_t	child_pid;
 	int		stat;
 
-	if (find_builtin(command, env) == 0)
+	if (find_builtin(command) == 0)
 		return (0);
-	if ((exec_path = find_exec(env, command[0])) == NULL)
+	if ((exec_path = find_exec(command[0])) == NULL)
 		return (error("command not found", command[0], 1));
 	if ((child_pid = fork()) == -1)
 	{
@@ -105,7 +106,7 @@ int			eval_command(const char **command, char **env)
 	}
 	else if (child_pid == 0)
 	{
-		execve(exec_path, (char *const*)command, env);
+		execve(exec_path, (char *const*)command, environ);
 	}
 	else
 	{
