@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 22:27:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 20:49:09 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/20 21:04:22 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		find_builtin(const char **argv, const char **env)
 		{ "echo", builtin_echo },
 		{ "cd", builtin_cd },
 		{ "env", builtin_env },
+		{ "setenv", builtin_setenv },
 		{ NULL, NULL}
 	};
 	int					i;

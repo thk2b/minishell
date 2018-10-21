@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 20:42:56 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 20:50:42 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 00:11:31 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ int	builtin_env(const char **av, const char **env)
 	while (env[i])
 		ft_putendl(env[i++]);
 	return (0);
+}
+
+int	builtin_setenv(const char **av, const char **env)
+{
+	char	**new_env;
+
 }
