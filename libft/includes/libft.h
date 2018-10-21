@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 23:36:48 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 18:46:50 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 00:21:57 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+
+# define MCK(addr, ret) if (!(addr)) return (ret)
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *b, size_t len);
@@ -111,15 +113,10 @@ void			ft_btree_backinorder(t_btree *tree, void *ctx,
 	void (*f)(void*, void*));
 void			ft_btree_backpostorder(t_btree *tree, void *ctx,
 	void (*f)(void*, void*));
-/*
-** char *ft_strsjoin(const char *s, char* sep, const char *t);
-** char	*ft_strchrs(const char *s, const char *targets);
-** void	*ft_strreduce(char *s, char (*f)(void *acc, char));
-** void	*ft_strreducei(char *s, char (*f)(void *acc, unsigned int, char));
-** void	ft_lstsort(t_list *lst, void* ref, int (*f)(void*, void*, void*));
-** void	ft_lstbubblesort(t_list *lst, void* ref, int (*f)(void*, void*, void*);
-** void	ft_lstmergesort(t_list *lst, void* ref, int (*f)(void*, void*, void*);
-** void	ft_lstquicksort(t_list *lst, void* ref, int (*f)(void*, void*, void*);
-*/
+
+void			ft_putstrv(const char **strv);
+size_t			ft_strv_len(const char **strv);
+char			**ft_strv_add(const char **strv, char *str);
+char			**ft_strv_remove(char **strv, size_t index);
 
 #endif
