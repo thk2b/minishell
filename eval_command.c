@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 19:11:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 16:41:35 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:15:41 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int			eval_command(const char **command)
 	pid_t	child_pid;
 	int		stat;
 
+	if (command[0] == NULL)
+		return (0);
 	if (find_builtin(command) == 0)
 		return (0);
 	if ((exec_path = find_exec(command[0])) == NULL)
