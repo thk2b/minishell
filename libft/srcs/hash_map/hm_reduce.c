@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hm_foreach.c                                       :+:      :+:    :+:   */
+/*   hm_reduce.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 21:44:17 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 14:53:53 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/25 14:53:57 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 14:54:08 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_map.h"
 
-void	hm_foreach(t_hm *hm, void *ctx, t_hm_foreach_fn fn)
+void	*hm_reduce(t_hm *hm, void *ctx, t_hm_reduce_fn fn)
 {
 	size_t			i;
 	t_llist			*list;
 	t_llist_node	*node;
 	t_hm_item		*item;
+	void			*acc;
 
 	i = 0;
+	acc = ctx;
 	while (i < hm->arr_size)
 	{
 		list = hm->keys[i++];
@@ -29,9 +31,10 @@ void	hm_foreach(t_hm *hm, void *ctx, t_hm_foreach_fn fn)
 			while (node)
 			{
 				item = (t_hm_item*)node->data;
-				fn(ctx, item->key, item->value);
+				acc = fn(acc, item->key, item->value);
 				node = node->next;
 			}
 		}
 	}
+	return (ctx);
 }

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 21:34:12 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/22 20:30:47 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 14:20:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void		*hm_find(t_hm *hm, const char *key)
 	t_llist_node	*node;
 	t_hm_item		*item;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), NULL);
-	item_container = hm->keys[index % hm->arr_size];
+	VALIDATE_HASH(index = hm->hash_fn(key) % hm->arr_size, NULL);
+	item_container = hm->keys[index];
 	MCK(node = llist_find(item_container, (char*)key, cmp_item), NULL);
 	item = (t_hm_item*)node->data;
 	return (item ? item->value : NULL);

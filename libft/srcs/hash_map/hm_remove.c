@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 21:48:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 21:43:09 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 14:20:04 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void		*hm_remove(t_hm *hm, const char *key)
 	int				index;
 	t_llist			*item_container;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), NULL);
-	item_container = hm->keys[index % hm->arr_size];
+	VALIDATE_HASH(index = hm->hash_fn(key) % hm->arr_size, NULL);
+	item_container = hm->keys[index];
 	llist_remove(item_container, (void*)key, cmp_item, del_item);
 	hm->size--;
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:19:21 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:47:39 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 14:20:58 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static int	init_env(t_runtime *rt)
 				free(key);
 				continue ;
 			}
-			printf("%s=%s\n", key, value);
 			hm_insert(rt->env, key, value);
-			printf(">%s\n", hm_find(rt->env, key));
 		}
 		i++;
 	}

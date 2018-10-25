@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 20:42:13 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 21:57:26 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 14:47:44 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef int		(*t_hm_hash_fn)(const char *key);
 typedef void	(*t_hm_foreach_fn)(void *ctx, const char *key, void *value);
+typedef void	*(*t_hm_reduce_fn)(void *ctx, const char *key, void *value);
 
 typedef struct	s_hm
 {
@@ -42,5 +43,6 @@ int				hm_insert(t_hm *hm, const char *key, void *value);
 void			*hm_find(t_hm *hm, const char *key);
 void			*hm_remove(t_hm *hm, const char *key);
 void			hm_foreach(t_hm *hm, void *ctx, t_hm_foreach_fn fn);
+void			*hm_reduce(t_hm *hm, void *ctx, t_hm_reduce_fn fn);
 
 #endif
