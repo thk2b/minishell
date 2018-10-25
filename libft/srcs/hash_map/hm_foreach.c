@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hm_insert.c                                        :+:      :+:    :+:   */
+/*   hm_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/21 21:20:40 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:42:59 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 21:44:17 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 21:49:15 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_map.h"
-#include "libft.h"
 
-int		hm_insert(t_hm *hm, const char *key, void *value)
+void	hm_foreach(t_hm *hm, void *ctx, t_hm_foreach_fn fn)
 {
-	int			index;
-	t_hm_item	*item;
+	size_t			i;
+	t_llist			*list;
+	t_llist_node	*node;
+	t_hm_item		*item;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), 1);
-	MCK(item = hm_new_item(key, value), 1);
-	llist_push(&hm->keys[index % hm->arr_size], (void*)item);
-	hm->size++;
-	return (0);
+	i = 0;
+	while (i < hm->arr_size)
+	{
+		list = hm->keys[i++];
+		if (list)
+		{
+			node = list->first;
+			while (node)
+			{
+				item = (t_hm_item*)node->data;
+				fn(ctx, item->key, item->value);
+				node = node->next;
+			}
+		}
+	}
 }

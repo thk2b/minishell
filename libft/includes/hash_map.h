@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 20:42:13 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/22 19:51:15 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/24 21:57:26 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 # define VALIDATE_HASH(i, r) if((i) < 0) return (r)
 
 typedef int		(*t_hm_hash_fn)(const char *key);
+typedef void	(*t_hm_foreach_fn)(void *ctx, const char *key, void *value);
 
 typedef struct	s_hm
 {
 	size_t			arr_size;
 	t_llist			**keys;
 	t_hm_hash_fn	hash_fn;
+	size_t			size;
 }				t_hm;
 
 typedef struct	s_hm_item
@@ -39,5 +41,6 @@ void			*hm_free(t_hm *hm);
 int				hm_insert(t_hm *hm, const char *key, void *value);
 void			*hm_find(t_hm *hm, const char *key);
 void			*hm_remove(t_hm *hm, const char *key);
+void			hm_foreach(t_hm *hm, void *ctx, t_hm_foreach_fn fn);
 
 #endif

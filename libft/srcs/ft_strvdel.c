@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hm_insert.c                                        :+:      :+:    :+:   */
+/*   ft_strvdel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/21 21:20:40 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:42:59 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 22:11:02 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 22:12:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash_map.h"
 #include "libft.h"
 
-int		hm_insert(t_hm *hm, const char *key, void *value)
+void	ft_strvdel(char **strv)
 {
-	int			index;
-	t_hm_item	*item;
+	size_t	i;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), 1);
-	MCK(item = hm_new_item(key, value), 1);
-	llist_push(&hm->keys[index % hm->arr_size], (void*)item);
-	hm->size++;
-	return (0);
+	i = 0;
+	while (strv[i])
+		free(strv[i++]);
+	free(strv);
 }

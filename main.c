@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hm_insert.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/21 21:20:40 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:42:59 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 22:35:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash_map.h"
-#include "libft.h"
+#include "minishell.h"
+#include "builtins.h"
+#include <unistd.h>
 
-int		hm_insert(t_hm *hm, const char *key, void *value)
+int			main(void)
 {
-	int			index;
-	t_hm_item	*item;
+	t_runtime rt;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), 1);
-	MCK(item = hm_new_item(key, value), 1);
-	llist_push(&hm->keys[index % hm->arr_size], (void*)item);
-	hm->size++;
-	return (0);
+	runtime_init(&rt);
+	env(&rt, NULL);
+	// while (1)
+	// {
+		// prompt(&rt);
+		// read_cmd(&rt);
+		// exec_cmd(&rt);
+	// }
 }

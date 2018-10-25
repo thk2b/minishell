@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hm_insert.c                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/21 21:20:40 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:42:59 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 22:35:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hash_map.h"
-#include "libft.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include "libft.h"
+# include "hash_map.h"
 
-int		hm_insert(t_hm *hm, const char *key, void *value)
+typedef struct	s_runtime
 {
-	int			index;
-	t_hm_item	*item;
+	t_hm	*env;
+	t_hm	*vars;
+	char	**path;
+	char	**cmd;
+	int		status;
+}				t_runtime;
 
-	VALIDATE_HASH(index = hm->hash_fn(key), 1);
-	MCK(item = hm_new_item(key, value), 1);
-	llist_push(&hm->keys[index % hm->arr_size], (void*)item);
-	hm->size++;
-	return (0);
-}
+int		runtime_init(t_runtime *rt);
+int		prompt(t_runtime *rt);
+int		read_cmd(t_runtime *rt);
+int		exec_cmd(t_runtime *rt);
+
+#endif
