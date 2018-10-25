@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   pq_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 19:39:02 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 20:14:30 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/22 23:06:10 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 11:45:42 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "priority_queue.h"
 #include "libft.h"
+#include <stdlib.h>
 
-int		error(const char *predicate, const char *subject, int ret)
+int	pq_add(t_pq **pq, void *data, int value, t_pq_sort sort_type)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(predicate);
-	if (subject)
+	t_pq	*el;
+	t_pq	*cur;
+	t_pq	*prev;
+
+	MCK(el = pq_new(data, value), 1);
+	if (*pq == NULL)
+		return (!((*pq = el)));
+	prev = NULL;
+	cur = *pq;
+	while (cur && PQ_CMP(sort_type, cur->value, value))
 	{
-		ft_putstr(": ");
-		ft_putstr(subject);
+		prev = cur;
+		cur = cur->next;
 	}
-	ft_putendl("");
-	return (ret);
+	if (prev)
+		prev->next = el;
+	el->next = cur;
+	if (cur == *pq)
+		*pq = el;
+	return (0);
 }

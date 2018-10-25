@@ -4,7 +4,16 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCDIR = srcs
 INCLUDEDIR = includes
+
+LINKED_LIST_SRCS = $(addprefix linked_list/, llist_new.c llist_free.c llist_push.c llist_shift.c llist_find.c llist_remove.c)
+HASH_MAP_SRCS = $(addprefix hash_map/, hash_ascii.c hm_new.c hm_find.c hm_free.c hm_insert.c hm_new.c hm_remove.c)
+QUEUE_SRCS = $(addprefix queue/, queue_new.c queue_free.c queue_add.c queue_pop.c)
+PRIORITY_QUEUE_SRCS = $(addprefix priority_queue/, pq_new.c pq_free.c pq_add.c pq_get.c pq_pop.c)
 SRCS = $(addprefix $(SRCDIR)/,\
+	$(LINKED_LIST_SRCS)\
+	$(HASH_MAP_SRCS)\
+	$(QUEUE_SRCS)\
+	$(PRIORITY_QUEUE_SRCS)\
 	ft_memset.c\
 	ft_bzero.c\
 	ft_memcpy.c\

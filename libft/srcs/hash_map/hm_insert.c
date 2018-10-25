@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   hm_insert.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 22:44:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:24:06 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/21 21:20:40 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/22 20:30:55 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include <unistd.h>
+#include "hash_map.h"
+#include "libft.h"
 
-int		builtin_cd(const char **argv)
+int		hm_insert(t_hm *hm, const char *key, void *value)
 {
-	if (argv[1] == NULL)
-		return (chdir(".."));
-	return (chdir(argv[1]));
+	int			index;
+	t_hm_item	*item;
+
+	VALIDATE_HASH(index = hm->hash_fn(key), 1);
+	MCK(item = hm_new_item(key, value), 1);
+	llist_push(&hm->keys[index % hm->arr_size], (void*)item);
+	return (0);
 }

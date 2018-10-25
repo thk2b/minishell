@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_add.c                                      :+:      :+:    :+:   */
+/*   hm_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:27:16 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/21 21:19:04 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/21 21:20:15 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "hash_map.h"
 
-char	**ft_strv_add(const char **strv, char *str)
+void	*hm_free(t_hm *hm)
 {
-	size_t	len;
-	char	**n;
-
-	len = ft_strv_len(strv);
-	if ((n = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
-		return (NULL);
-	ft_memcpy(n, strv, len * sizeof(char*));
-	n[len] = str;
-	n[len + 1] = NULL;
-	return (n);
+	free(hm->keys);
+	free(hm);
+	return (NULL);
 }

@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_add.c                                      :+:      :+:    :+:   */
+/*   queue_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:27:16 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 12:59:12 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 13:24:55 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "queue.h"
 #include "libft.h"
 
-char	**ft_strv_add(const char **strv, char *str)
+int	queue_add(t_queue **q, void *data)
 {
-	size_t	len;
-	char	**n;
+	t_queue_node	*node;
 
-	len = ft_strv_len(strv);
-	if ((n = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
-		return (NULL);
-	ft_memcpy(n, strv, len * sizeof(char*));
-	n[len] = str;
-	n[len + 1] = NULL;
-	return (n);
+	MCK(node = queue_new_node(data), 1);
+	node->data = data;
+	if (*q == NULL)
+	{
+		MCK(*q = queue_new(), 1);
+		(*q)->first = node;
+		(*q)->last = node;
+	}
+	else if ((*q)->first == NULL)
+	{
+		(*q)->first = node;
+		(*q)->last = node;
+	}
+	else
+	{
+		(*q)->last->next = node;
+		(*q)->last = node;
+	}
+	return (0);
 }

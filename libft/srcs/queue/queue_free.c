@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*   queue_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 16:46:59 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 17:24:12 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 12:55:07 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 12:58:38 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include "libft.h"
-#include <unistd.h>
+#include "queue.h"
+#include <stdlib.h>
 
-int		builtin_echo(const char **argv)
+static void	default_del(void *d)
 {
-	int		i;
-	ssize_t	status;
+	free(d);
+}
 
-	i = 1;
-	status = 0;
-	while (argv[i])
+void		queue_free(t_queue *q, t_queue_del_fn del)
+{
+	t_queue_node *cur;
+	t_queue_node *next;
+
+	if (del == NULL)
+		del = default_del;
+	cur = q->first;
+	while (cur)
 	{
-		status = write(1, argv[i], ft_strlen(argv[i]));
-		status += write(1, " ", 1);
-		if (status <= 0)
-			return(1);
-		i++;
+		next = cur->next;
+		del(cur->data);
+		free(cur);
+		cur = next;
 	}
-	status += write(1, "\n", 1);
-	return (0);
 }

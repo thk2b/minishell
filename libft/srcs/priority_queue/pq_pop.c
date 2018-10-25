@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   pq_pop.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 18:56:54 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/19 23:01:12 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/22 23:34:02 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 13:25:42 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <unistd.h>
+#include "priority_queue.h"
 
-int		prompt(void)
+void		*pq_pop(t_pq **pq)
 {
-	return (write(1, PROMPT, PROMPT_LEN) == PROMPT_LEN);
+	t_pq	*ret;
+	void	*data;
+
+	ret = *pq;
+	if (ret == NULL)
+		return (NULL);
+	*pq = ret->next;
+	data = ret->data;
+	free(ret);
+	return (data);
 }

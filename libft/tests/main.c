@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_add.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:27:16 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/21 23:14:44 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/24 13:25:20 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tests.h"
 #include "libft.h"
 
-char	**ft_strv_add(const char **strv, char *str)
+int	main(void)
 {
-	size_t	len;
-	char	**n;
-
-	len = ft_strv_len(strv);
-	if ((n = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
-		return (NULL);
-	ft_memcpy(n, strv, len * sizeof(char*));
-	n[len] = str;
-	n[len + 1] = NULL;
-	return (n);
+	ft_putendl("llist");
+	test_llist();
+	ft_putendl("hm");
+	test_hm();
+	ft_putendl("queue");
+	test_queue();
+	ft_putendl("pq");
+	test_pq();
 }

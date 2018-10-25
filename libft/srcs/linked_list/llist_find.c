@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_add.c                                      :+:      :+:    :+:   */
+/*   llist_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:27:16 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/21 22:43:56 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/22 20:36:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-char	**ft_strv_add(const char **strv, char *str)
+t_llist_node	*llist_find(t_llist *head, void *ctx, t_llist_cmp_fn cmp)
 {
-	size_t	len;
-	char	**n;
+	t_llist_node	*node;
 
-	len = ft_strv_len(strv);
-	if ((n = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
+	if (head == NULL)
 		return (NULL);
-	ft_memcpy(n, strv, len * sizeof(char*));
-	n[len] = str;
-	n[len + 1] = NULL;
-	return (n);
+	node = head->first;
+	while (node)
+		if (cmp(ctx, node->data))
+			return (node);
+		else
+			node = node->next;
+	return (NULL);
 }

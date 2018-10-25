@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_add.c                                      :+:      :+:    :+:   */
+/*   llist_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 15:27:16 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/21 22:24:35 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/21 23:01:24 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
+#include <stdlib.h>
 
-char	**ft_strv_add(const char **strv, char *str)
+void	*llist_free(t_llist *head, t_llist_del_fn del)
 {
-	size_t	len;
-	char	**n;
+	t_llist_node	*node;
+	t_llist_node	*next;
 
-	len = ft_strv_len(strv);
-	if ((n = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
-		return (NULL);
-	ft_memcpy(n, strv, len * sizeof(char*));
-	n[len] = str;
-	n[len + 1] = NULL;
-	return (n);
+	node = head->first;
+	while (node)
+	{
+		next = node->next;
+		del(node);
+		free(node);
+		node = next;
+	}
+	free(head);
+	return (NULL);
 }
