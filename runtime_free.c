@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   llist_free.c                                       :+:      :+:    :+:   */
+/*   runtime_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/21 22:24:35 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 15:40:07 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/25 15:30:48 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 15:42:03 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
-#include <stdlib.h>
+#include "minishell.h"
 
-void	*llist_free(t_llist *head, t_llist_del_fn del)
+int		runtime_free(t_runtime *rt)
 {
-	t_llist_node	*node;
-	t_llist_node	*next;
-
-	node = head->first;
-	while (node)
-	{
-		next = node->next;
-		del(node->data);
-		free(node);
-		node = next;
-	}
-	free(head);
-	return (NULL);
+	hm_free(rt->env, NULL);
+	// hm_free(rt->vars, NULL);
+	// ft_strvdel(rt->path);
+	// ft_strvdel(rt->cmd);
+	while(1);
+	return (0);
 }

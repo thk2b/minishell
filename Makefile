@@ -11,6 +11,7 @@ BUILTINS_SRC = $(addprefix builtins/, env.c)
 SRC =\
 	$(BUILTINS_SRC)\
 	runtime_init.c\
+	runtime_free.c\
 	main.c\
 
 OBJ = $(SRC:.c=.o)

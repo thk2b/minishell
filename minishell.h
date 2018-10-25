@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:35:46 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 15:31:26 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_runtime
 }				t_runtime;
 
 int		runtime_init(t_runtime *rt);
+int		runtime_free(t_runtime *rt);
 int		prompt(t_runtime *rt);
 int		read_cmd(t_runtime *rt);
 int		exec_cmd(t_runtime *rt);
