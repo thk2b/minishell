@@ -8,13 +8,13 @@ INCLUDES = -I libft/includes -I ./ -I ./builtins -I./runtime
 
 
 BUILTINS_SRC = $(addprefix builtins/, env.c)
-RUNTIME_SRC = $(addprefix runtime/, free.c init.c)
 SRC =\
 	error.c\
 	$(BUILTINS_SRC)\
-	$(RUNTIME_SRC)\
 	prompt.c\
+	path.c\
 	read_cmd.c\
+	exec_cmd.c\
 	main.c\
 
 OBJ = $(SRC:.c=.o)

@@ -33,6 +33,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	ft_strrchr.c\
 	ft_strstr.c\
 	ft_strnstr.c\
+	ft_str_starts_with.c\
 	ft_strcmp.c\
 	ft_strncmp.c\
 	ft_atoi.c\

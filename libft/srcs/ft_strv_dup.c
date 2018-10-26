@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runtime_free.c                                     :+:      :+:    :+:   */
+/*   ft_strv_dup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 15:30:48 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 15:42:03 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/25 20:42:50 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 20:44:27 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		runtime_free(t_runtime *rt)
+char	**ft_strv_dup(const char **strv)
 {
-	hm_free(rt->env, NULL);
-	// hm_free(rt->vars, NULL);
-	// ft_strvdel(rt->path);
-	// ft_strvdel(rt->cmd);
-	while(1);
-	return (0);
+	size_t	len;
+	size_t	i;
+	char	**dup;
+
+	len = ft_strv_len(strv);
+	MCK(dup = (char**)malloc(sizeof(char*) * (len + 1)), NULL);
+	i = 0;
+	while (i < len)
+	{
+		dup[i] = strv[i];
+		i++;
+	}
+	dup[len] = NULL;
+	return (dup);
 }

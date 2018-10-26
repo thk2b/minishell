@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 23:36:48 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/24 22:10:51 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 21:23:00 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *s, const char *t);
 char			*ft_strnstr(const char *s, const char *t, size_t len);
+char			*ft_str_starts_with(const char *prefix, const char *str);
 int				ft_strcmp(const char *s, const char *t);
 int				ft_strncmp(const char *s, const char *t, size_t len);
 int				ft_atoi(const char *s);
