@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strvdel.c                                       :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 22:11:02 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 13:56:53 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/26 12:42:40 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/26 12:48:52 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtin.h"
+#include <unistd.h>
 
-void	ft_strvdel(char **strv)
+int	b_cd(char **av)
 {
-	size_t	len;
-	size_t	i;
-
-	len = ft_strv_len(strv);
-	i = 0;
-	while (i < len)
-	{
-		free(strv[i]);
-		i++;
-	}
-	free(strv);
-	strv = NULL;
+	if (av == NULL || av[0] == NULL)
+		return (1);
+	if (av[1] == NULL)
+		return (chdir("~") == -1);
+	return (chdir(av[1]) == -1);
 }

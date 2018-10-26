@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 21:00:30 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/21 14:19:47 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/26 14:08:47 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char		**alloc_splits(const char *s, char c, const char *escape)
 			count++;
 		s++;
 	}
-	return ((char**)malloc(count * sizeof(char**)));
+	return ((char**)malloc(count * (sizeof(char*) + 1)));
 }
 
 void			split(const char *s, char **strv, char c, const char *escape)
