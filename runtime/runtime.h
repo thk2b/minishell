@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   runtime.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 19:06:09 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/25 18:40:33 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 18:41:39 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "builtins.h"
-#include <unistd.h>
+#ifndef RUNTIME_H
+# define RUNTIME_H
+# include "hash_map.h"
 
-int			main(void)
+typedef struct	s_runtime
 {
-	t_runtime rt;
+	t_hm	*env;
+	t_hm	*vars;
+	char	**path;
+	char	**cmd;
+	int		status;
+}				t_runtime;
 
-	if(runtime_init(&rt))
-		error("runtime", "cannot init", 1);
-	while (1)
-	{
-		prompt(&rt);
-		read_cmd(&rt);
-		exec_cmd(&rt);
-	}
-	runtime_free(&rt);
-}
+int		runtime_init(t_runtime *rt);
+int		runtime_free(t_runtime *rt);
+
+#endif

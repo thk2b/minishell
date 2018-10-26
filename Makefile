@@ -4,14 +4,17 @@ LIBFT = libft/libft.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 HEAD = minishell.h
-INCLUDES = -I libft/includes -I ./ -I ./builtins
+INCLUDES = -I libft/includes -I ./ -I ./builtins -I./runtime
 
 
 BUILTINS_SRC = $(addprefix builtins/, env.c)
+RUNTIME_SRC = $(addprefix runtime/, free.c init.c)
 SRC =\
+	error.c\
 	$(BUILTINS_SRC)\
-	runtime_init.c\
-	runtime_free.c\
+	$(RUNTIME_SRC)\
+	prompt.c\
+	read_cmd.c\
 	main.c\
 
 OBJ = $(SRC:.c=.o)

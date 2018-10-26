@@ -6,26 +6,18 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 15:31:26 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/25 19:05:12 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft.h"
-# include "hash_map.h"
+# include "runtime.h"
 
-typedef struct	s_runtime
-{
-	t_hm	*env;
-	t_hm	*vars;
-	char	**path;
-	char	**cmd;
-	int		status;
-}				t_runtime;
+# define DEFAULT_PROMPT "<$> "
 
-int		runtime_init(t_runtime *rt);
-int		runtime_free(t_runtime *rt);
+int		error(const char *predicat, const char *subject, int ret);
 int		prompt(t_runtime *rt);
 int		read_cmd(t_runtime *rt);
 int		exec_cmd(t_runtime *rt);
