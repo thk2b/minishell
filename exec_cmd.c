@@ -6,11 +6,12 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 23:22:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/26 00:50:51 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtin.h"
 // #include "hashmap.h"
 #include <unistd.h>
 #include <limits.h>
@@ -35,7 +36,6 @@ static int	is_path(char *str)
 
 static char	*get_exec_path(char **path, char **cmd)
 {
-	size_t	len;
 	size_t	i;
 	char	exec_path[PATH_MAX];
 
@@ -46,7 +46,6 @@ static char	*get_exec_path(char **path, char **cmd)
 		else
 			return (NULL);
 	}
-	len = ft_strv_len((const char **)path);
 	i = 0;
 	while (path[i])
 	{
@@ -68,8 +67,8 @@ int		exec_cmd(char **path, char **cmd)
 	status = 0;
 	if (cmd == NULL || cmd[0] == NULL)
 		return (0);
-	// if (try_exec_builtin(cmd, &status) == 0)
-	// 	return (status);
+	if (builtin(cmd, &status) == 0)
+		return (status);
 	if ((exec_path = get_exec_path(path, cmd)) == NULL)
 		return (error("command not found", NULL, 1));
 	if ((pid = fork()) == -1)

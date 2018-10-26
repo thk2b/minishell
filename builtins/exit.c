@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 21:52:21 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/25 21:25:34 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/25 23:36:29 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 23:41:21 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-# include "minishell.h"
+#include "builtin.h"
 
-int		env(char **av);
-
-#endif
+int		b_exit(char **av)
+{
+	(void)av;
+	return (-1);
+}

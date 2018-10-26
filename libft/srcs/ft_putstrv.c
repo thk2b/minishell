@@ -6,13 +6,13 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 23:01:23 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/20 23:02:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/26 00:09:28 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstrv(const char **strv)
+void	ft_putstrv(char **strv)
 {
 	size_t	i;
 

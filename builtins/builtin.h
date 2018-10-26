@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 21:14:45 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 00:11:53 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/24 21:52:21 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/25 23:58:33 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
+# include "minishell.h"
 
-static char	*find_path(char **env)
+typedef int		(*t_builtin_fn)(char **av);
+typedef struct	s_builtin
 {
-	size_t	len;
-	size_t	i;
+	char			*name;
+	t_builtin_fn	fn;
+}				t_builtin;
 
-	len = ft_strv_len(env);
-	i = 0;
-	while (i < len)
-	{
-		if (ft_strncmp("PATH=", env[i], 5) == 0)
-			return (env[i] + 5);
-		i++;
-	}
-	return (NULL);
-}
+int			b_env(char **av);
+int			b_setenv(char **av);
+int			b_unsetenv(char **av);
+int			b_exit(char **av);
+int			builtin(char **av, int *status);
 
-char		**get_path(char **env)
-{
-	char	*path;
-
-	MCK(path = find_path(env), NULL);
-	return (ft_strsplit(path, ':'));
-}
+#endif
