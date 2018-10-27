@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 23:32:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 12:53:02 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 13:29:10 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		builtin(char **av, int *status)
 	};
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		if (ft_strcmp(av[0], builtins[i].name) == 0)
 		{

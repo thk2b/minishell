@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:51:11 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 12:47:53 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 13:28:21 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ int			b_setenv(char **av)
 int			b_unsetenv(char **av)
 {
 	extern char	**environ;
+	int			status;
+	int			i;
 
 	if (av == NULL || av[0] == NULL || av[1] == NULL)
 		return (1);
-	return (ft_unsetenv(av[1]) == -1);
+	status = 0;
+	i = 1;
+	while (av[i])
+		status = status || (ft_unsetenv(av[i++]) == -1);
+	return (status);
 }
