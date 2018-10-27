@@ -6,18 +6,15 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 14:04:32 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 16:04:21 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtin.h"
-// #include "hashmap.h"
 #include <unistd.h>
 #include <limits.h>
-
-#include <printf.h>
-extern char **environ;
+#include <signal.h>
 
 static void	build_exec_path(char *dst, char *path, char *exec_name)
 {
@@ -38,28 +35,47 @@ static char	*get_exec_path(char **path, char **cmd)
 {
 	size_t	i;
 	char	exec_path[PATH_MAX];
+	int		found;
 
 	if (is_path(cmd[0]))
 	{
-		if (access(cmd[0], X_OK) == 0)
-			return (ft_strdup(cmd[0]));
+		if (access(cmd[0], F_OK) == 0)
+		{
+			if (access(cmd[0], X_OK) == 0)
+				return (ft_strdup(cmd[0]));
+			error("permission denied", NULL, 1);
+		}
 		else
-			return (NULL);
+			error("command not found", NULL, 1);
+		return (NULL);
 	}
 	i = 0;
+	found = 0;
 	while (path[i])
 	{
 		build_exec_path(exec_path, path[i], cmd[0]);
-		if (access(exec_path, X_OK) == 0)
-			return (ft_strcjoin(path[i], '/', cmd[0]));
+		if (access(exec_path, F_OK) == 0)
+		{
+			found = 1;
+			if (access(exec_path, X_OK) == 0)
+				return (ft_strcjoin(path[i], '/', cmd[0]));
+		}
 		i++;
 	}
+	if (found)
+		error("permission denied", NULL, 1);
+	error("command not found", NULL, 1);
 	return (NULL);
+}
+
+void	kill_child_process(int sig)
+{
+	(void)sig;
 }
 
 int		exec_cmd(char **path, char **cmd)
 {
-	// static t_hm	*pathmap;
+	extern char **environ;
 	char	*exec_path;
 	int		status;
 	pid_t	pid;
@@ -70,22 +86,24 @@ int		exec_cmd(char **path, char **cmd)
 	if (builtin(cmd, &status) == 0)
 		return (status);
 	if ((exec_path = get_exec_path(path, cmd)) == NULL)
-		return (error("command not found", NULL, 1));
+		return (1);
 	if ((pid = fork()) == -1)
 	{
 		free(exec_path);
-		return (error("exec_cmd", "cannot fork", 1));
+		return (error("cannot fork", NULL, 1));
 	}
 	else if (pid == 0)
 	{
 		if(execve(exec_path, cmd, environ))
-			return (error("exec_cmd", "cannot exec", 1));
+			return (error("cannot exec", NULL, 1));
 	}
 	else
 	{
 		free(exec_path);
+		signal(SIGINT, kill_child_process);
 		if(waitpid(pid, &status, 0) == -1)
 			return (error("exec_cmd", "cannot wait", 1));
+		signal(SIGINT, SIG_DFL);
 	}
 	return (status);
 }
