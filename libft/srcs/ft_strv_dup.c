@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 20:42:50 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 00:02:12 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 11:37:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	**ft_strv_dup(char **strv)
 	len = ft_strv_len(strv);
 	MCK(dup = (char**)malloc(sizeof(char*) * (len + 1)), NULL);
 	i = 0;
-	while (i < len)
+	while (strv[i])
 	{
-		dup[i] = strv[i];
+		dup[i] = ft_strdup(strv[i]);
 		i++;
 	}
 	dup[len] = NULL;

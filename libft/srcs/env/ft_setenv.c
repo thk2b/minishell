@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:23:59 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 23:51:46 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 12:07:14 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ft_setenv(const char *name, const char *value, int overwrite)
 	current = ft_getenv(name);
 	if (current && overwrite == 0)
 		return (-1);
+	ft_unsetenv(name);
 	MCK(str = ft_strcjoin(name, '=', value), -1);
 	return (ft_putenv(str));
 }
