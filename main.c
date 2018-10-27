@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 00:26:03 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 15:43:34 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,17 @@ int			main(void)
 	while (1)
 	{
 		prompt(status);
-		if ((cmd = read_cmd()) == NULL)
+		if ((cmd = read_cmd()) == NULL || cmd[0] == NULL)
+		{
+			status = 0;
 			continue ;
+		}
+		if (ft_strcmp(cmd[0], "exit") == 0)
+			break ;
 		status = exec_cmd(path, cmd);
 		ft_strvdel(cmd);
-		if (status == -1)
-			break ;
 	}
+	ft_strvdel(cmd);
 	teardown(vars, path);
 	return (0);
 }
