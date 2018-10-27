@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 23:32:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 12:53:02 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/27 12:52:24 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/27 12:56:59 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "libft.h"
 
-int		builtin(char **av, int *status)
+int		b_echo(char **av)
 {
-	size_t				i;
-	static t_builtin	builtins[] = {
-		{"exit", b_exit},
-		{"cd", b_cd},
-		{"eecho", b_echo},
-		{"env", b_env},
-		{"setenv", b_setenv},
-		{"unsetenv", b_unsetenv},
-	};
+	char	**words;
+	int		i;
 
-	i = 0;
-	while (i < 5)
+
+	if (av == NULL || av[0] == NULL)
+		return (1);
+	if (av[1])
 	{
-		if (ft_strcmp(av[0], builtins[i].name) == 0)
+		MCK(words = ft_strsplit_escape(av[1], ' ', "\"\'"), 1);
+		i = 0;
+		while (words[i])
 		{
-			*status = builtins[i].fn(av);
-			return (0);
+			if (i)
+				ft_putchar(' ');
+			ft_putstr(words[i]);
 		}
-		i++;
 	}
-	return (1);
+	ft_putchar('\n');
+	return (0);
 }

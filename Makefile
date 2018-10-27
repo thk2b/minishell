@@ -7,7 +7,7 @@ HEAD = minishell.h
 INCLUDES = -I libft/includes -I ./ -I ./builtins -I./runtime
 
 
-BUILTINS_SRC = $(addprefix builtins/, builtin.c env.c exit.c cd.c)
+BUILTINS_SRC = $(addprefix builtins/, builtin.c env.c exit.c echo.c cd.c)
 SRC =\
 	error.c\
 	$(BUILTINS_SRC)\
