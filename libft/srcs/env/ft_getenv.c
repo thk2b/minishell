@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:21:17 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 23:51:33 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 12:36:09 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "env.h"
 #include <unistd.h>
 
-char	*ft_getenv(const char *name)
+char		*ft_getenv(const char *name)
 {
 	extern char **environ;
 	int			i;
@@ -26,7 +26,7 @@ char	*ft_getenv(const char *name)
 		if ((end = ft_strchr(environ[i], '=')) == NULL)
 			;
 		else if (ft_strncmp(environ[i], name, end - environ[i]) == 0)
-			return (environ[i]);
+			return (end + 1);
 		i++;
 	}
 	return (NULL);
