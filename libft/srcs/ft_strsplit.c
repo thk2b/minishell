@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 21:00:30 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 14:06:49 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 00:20:43 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char		**alloc_splits(const char *s, char c)
 	while (*s)
 		if (*s++ == c && *s && *s != c)
 			count++;
-	return ((char**)malloc(count * (sizeof(char*) + 1)));
+	return ((char**)malloc((count + 1) * sizeof(char*)));
 }
 
 char			**ft_strsplit(const char *s, char c)

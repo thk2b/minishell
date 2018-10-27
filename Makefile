@@ -2,7 +2,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror
 HEAD = minishell.h
 INCLUDES = -I libft/includes -I ./ -I ./builtins -I./runtime
 
