@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_dup.c                                      :+:      :+:    :+:   */
+/*   ft_putenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 20:42:50 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 00:02:12 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/26 23:29:58 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/27 00:06:28 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "libft.h"
+#include <unistd.h>
 
-char	**ft_strv_dup(char **strv)
+int		ft_putenv(char *str)
 {
-	size_t	len;
-	size_t	i;
-	char	**dup;
+	extern char	**environ;
+	static int	was_allocated = 0;
+	char		**new_env;
 
-	len = ft_strv_len(strv);
-	MCK(dup = (char**)malloc(sizeof(char*) * (len + 1)), NULL);
-	i = 0;
-	while (i < len)
-	{
-		dup[i] = strv[i];
-		i++;
-	}
-	dup[len] = NULL;
-	return (dup);
+	MCK(new_env = ft_strv_add(environ, str), -1);
+	if (was_allocated)
+		ft_strvdel(environ);
+	else
+		was_allocated = 1;
+	environ = new_env;
+	return (0);
 }

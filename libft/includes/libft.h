@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 23:36:48 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 00:09:24 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 00:00:48 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void			ft_btree_backpostorder(t_btree *tree, void *ctx,
 
 void			ft_putstrv(char **strv);
 size_t			ft_strv_len(char **strv);
+char			**ft_strv_dup(char **strv);
 char			**ft_strv_add(char **strv, char *str);
 char			**ft_strv_remove(char **strv, size_t index);
 

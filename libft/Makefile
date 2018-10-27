@@ -9,11 +9,13 @@ LINKED_LIST_SRCS = $(addprefix linked_list/, llist_new.c llist_free.c llist_push
 HASH_MAP_SRCS = $(addprefix hash_map/, hash_ascii.c hm_new.c hm_find.c hm_free.c hm_insert.c hm_new.c hm_remove.c hm_foreach.c hm_reduce.c)
 QUEUE_SRCS = $(addprefix queue/, queue_new.c queue_free.c queue_add.c queue_pop.c)
 PRIORITY_QUEUE_SRCS = $(addprefix priority_queue/, pq_new.c pq_free.c pq_add.c pq_get.c pq_pop.c)
+ENV_SRCS = $(addprefix env/, ft_getenv.c ft_setenv.c ft_putenv.c ft_unsetenv.c)
 SRCS = $(addprefix $(SRCDIR)/,\
 	$(LINKED_LIST_SRCS)\
 	$(HASH_MAP_SRCS)\
 	$(QUEUE_SRCS)\
 	$(PRIORITY_QUEUE_SRCS)\
+	$(ENV_SRCS)\
 	ft_memset.c\
 	ft_bzero.c\
 	ft_memcpy.c\
@@ -92,6 +94,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	ft_putstrv.c\
 	ft_strv_len.c\
 	ft_strv_add.c\
+	ft_strv_dup.c\
 	ft_strv_remove.c\
 )
 

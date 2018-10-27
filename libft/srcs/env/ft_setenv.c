@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strv_dup.c                                      :+:      :+:    :+:   */
+/*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 20:42:50 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 00:02:12 by tkobb            ###   ########.fr       */
+/*   Created: 2018/10/26 23:23:59 by tkobb             #+#    #+#             */
+/*   Updated: 2018/10/26 23:51:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "libft.h"
+#include <unistd.h>
 
-char	**ft_strv_dup(char **strv)
+int		ft_setenv(const char *name, const char *value, int overwrite)
 {
-	size_t	len;
-	size_t	i;
-	char	**dup;
+	char	*current;
+	char	*str;
 
-	len = ft_strv_len(strv);
-	MCK(dup = (char**)malloc(sizeof(char*) * (len + 1)), NULL);
-	i = 0;
-	while (i < len)
-	{
-		dup[i] = strv[i];
-		i++;
-	}
-	dup[len] = NULL;
-	return (dup);
+	current = ft_getenv(name);
+	if (current && overwrite == 0)
+		return (-1);
+	MCK(str = ft_strcjoin(name, '=', value), -1);
+	return (ft_putenv(str));
 }

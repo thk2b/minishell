@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/26 14:08:02 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 00:11:03 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 #include <unistd.h>
 #include <printf.h>
 
-extern char	**environ;
 
 static int	init(t_hm **vars, char ***path)
 {
+	extern char	**environ;
+
+	MCK(environ = ft_strv_dup(environ), 1);
 	MCK((*vars = hm_new(100, NULL)), 1);
 	MCK(*path = get_path(environ), 1);
 	return (0);
