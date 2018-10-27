@@ -2,7 +2,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 HEAD = minishell.h
 INCLUDES = -I libft/includes -I ./ -I ./builtins -I./runtime
 
@@ -25,10 +25,10 @@ $(LIBFT):
 	make -C libft
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME) -g
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEAD)
-	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@ -g
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	make clean -C libft
