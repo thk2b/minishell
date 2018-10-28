@@ -1,0 +1,28 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{ 
+			"name": "(lldb) Attach",
+			"type": "cppdbg",
+			"request": "attach",
+			"program": "${workspaceFolder}/minishell",
+			"processId": "${command:pickProcess}",
+			"MIMode": "lldb"
+		},
+		{
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [{"Name": "theo", "Value": "a", "LESS": "-R", "VERSIONER_PYTHON_PREFER_32_BIT": "no", "LC_CTYPE": "en_US.UTF-8", "TERM_PROGRAM_VERSION": "3.1.5", "LOGNAME": "tkobb", "USER": "tkobb", "PATH": "/nfs/2018/t/tkobb/bin:/usr/local/bin:/nfs/2018/t/tkobb/go-bin/bin:/nfs/2018/t/tkobb/bin:/usr/local/bin:/nfs/2018/t/tkobb/go-bin/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki", "HOME": "/nfs/2018/t/tkobb", "ZSH_DISABLE_COMPFIX": "true", "ZSH": "/nfs/2018/t/tkobb/.oh-my-zsh", "DISPLAY": "/private/tmp/com.apple.launchd.RXpEmrAW1v/org.macosforge.xquartz:0", "TERM_PROGRAM": "iTerm.app", "LANG": "en_US.UTF-8", "TERM": "xterm-256color", "Apple_PubSub_Socket_Render": "/private/tmp/com.apple.launchd.SWXYWnkGO7/Render", "COLORFGBG": "7;0", "VERSIONER_PYTHON_VERSION": "2.7", "SHLVL": "3", "XPC_FLAGS": "0x0", "ITERM_SESSION_ID": "w1t0p0:FD5F586B-6938-457B-B167-77B79BC96E68", "TMPDIR": "/var/folders/zz/zyxvpxvq6csfxvn_n000480w001207/T/", "TERM_SESSION_ID": "w1t0p0:FD5F586B-6938-457B-B167-77B79BC96E68", "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.fQzlxJQrY1/Listeners", "XPC_SERVICE_NAME": "0", "SHELL": "/bin/zsh", "ITERM_PROFILE": "Default", "_": "/usr/bin/python", "LSCOLORS": "Gxfxcxdxbxegedabagacad", "OLDPWD": "/nfs/2018/t/tkobb/minishell", "__CF_USER_TEXT_ENCODING": "0x8807:0:0", "PWD": "/nfs/2018/t/tkobb/minishell", "COLORTERM": "truecolor", "PAGER": "less"}],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		}
+	]
+}

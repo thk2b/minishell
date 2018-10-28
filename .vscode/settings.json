@@ -4,6 +4,11 @@
 		"minishell.h": "c",
 		"builtins.h": "c",
 		"libft.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"unistd.h": "c",
+		"builtin.h": "c",
+		"typeinfo": "c",
+		"env.h": "c",
+		"types.h": "c"
 	}
 }
