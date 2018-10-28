@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 22:58:31 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 11:48:16 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 23:36:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**ft_strv_add(char **strv, char *str)
 	len = ft_strv_len(strv);
 	if ((n = (char**)malloc(sizeof(char*) * (len + 2))) == NULL)
 		return (NULL);
-	ft_memcpy(n, strv, len * (sizeof(char*) + 1));
+	ft_memcpy(n, strv, (len + 1) * (sizeof(char*)));
 	n[len] = str;
 	n[len + 1] = NULL;
 	return (n);
