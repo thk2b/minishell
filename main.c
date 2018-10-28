@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 20:32:49 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 22:04:27 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			main(void)
 		prompt(status);
 		if ((cmd = read_cmd()) == NULL || cmd[0] == NULL)
 		{
-			if (cmd[0] == NULL)
+			if (cmd && cmd[0] == NULL)
 				free(cmd);
 			status = 0;
 			continue ;
