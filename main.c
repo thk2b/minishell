@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 01:11:55 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 01:28:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	init(char ***path)
 static int	teardown(char ***path)
 {
 	ft_strvdel(*path);
-	// environ ?
 	return (0);
 }
 
@@ -35,7 +34,7 @@ static void	check_update_path(char **cmd, char ***path)
 {
 	if ((ft_strcmp(cmd[0], "setenv") == 0
 	|| ft_strcmp(cmd[0], "unsetenv") == 0)
-	&& ft_strcmp(cmd[1], "PATH") == 0)
+	&& cmd[1] && ft_strcmp(cmd[1], "PATH") == 0)
 	{
 		if (*path)
 			ft_strvdel(*path);
