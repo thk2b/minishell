@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:33:15 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 22:57:41 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:01:17 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 static int	get_env_index(const char *name)
 {
 	extern char	**environ;
-	int		i;
-	char	*end;
+	int			i;
+	char		*end;
 
 	i = 0;
 	while (environ[i])
@@ -32,7 +32,7 @@ static int	get_env_index(const char *name)
 	return (-1);
 }
 
-int		ft_unsetenv(const char *name)
+int			ft_unsetenv(const char *name)
 {
 	extern char	**environ;
 	int			i;

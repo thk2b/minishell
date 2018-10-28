@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 18:55:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 19:56:53 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:00:59 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**read_cmd(void)
 		return (NULL);
 	}
 	signal(SIGINT, SIG_DFL);
-	if((cmd = ft_strsplit_escape(line, ' ', "\"\'")) == NULL)
+	if ((cmd = ft_strsplit_escape(line, ' ', "\"\'")) == NULL)
 	{
 		error("cannot split", NULL, 0);
 		return (NULL);

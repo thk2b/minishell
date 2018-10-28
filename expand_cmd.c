@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 20:33:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 22:11:16 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:01:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		expand_var(char **str)
 	char	*new;
 	char	*tmp;
 
-	if((name_start = ft_strchr(*str, '$')) == NULL)
+	if ((name_start = ft_strchr(*str, '$')) == NULL)
 		return (1);
 	if ((name_end = ft_strchr(name_start + 1, '$')))
 		*name_end = '\0';
@@ -70,7 +70,7 @@ int		expand_cmd(char **cmd)
 		if (cmd[i][0] == '~' && (cmd[i][1] == '/' || cmd[i][1] == '\0'))
 			expand_tilde(cmd + i);
 		while (ft_strchr(cmd[i], '$'))
-			if(expand_var(cmd + i))
+			if (expand_var(cmd + i))
 				break ;
 		i++;
 	}

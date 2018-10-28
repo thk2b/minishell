@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 20:09:36 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:04:42 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ static char	*get_exec_path(char **path, char **cmd)
 	return (NULL);
 }
 
-int		exec_cmd(char **path, char **cmd)
+int			exec_cmd(char **path, char **cmd)
 {
-	extern char **environ;
-	char	*exec_path;
-	int		status;
-	pid_t	pid;
+	extern char	**environ;
+	char		*exec_path;
+	int			status;
+	pid_t		pid;
 
 	status = 0;
 	if (cmd == NULL || cmd[0] == NULL)
@@ -89,14 +89,14 @@ int		exec_cmd(char **path, char **cmd)
 	}
 	else if (pid == 0)
 	{
-		if(execve(exec_path, cmd, environ))
+		if (execve(exec_path, cmd, environ))
 			return (error("cannot exec", NULL, 1));
 	}
 	else
 	{
 		free(exec_path);
 		signal(SIGINT, SIG_IGN);
-		if(waitpid(pid, &status, 0) == -1)
+		if (waitpid(pid, &status, 0) == -1)
 			return (error("exec_cmd", "cannot wait", 1));
 		signal(SIGINT, SIG_DFL);
 	}

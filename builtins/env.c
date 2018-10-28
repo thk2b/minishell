@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:51:11 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 22:58:46 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:04:04 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			b_env(char **av)
 		}
 		return (status);
 	}
-		ft_putstrv(environ);
+	ft_putstrv(environ);
 	return (0);
 }
 
