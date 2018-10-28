@@ -6,12 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 20:33:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 00:28:00 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:37:20 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "env.h"
 #include <unistd.h>
 

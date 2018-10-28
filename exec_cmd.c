@@ -6,12 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 00:21:08 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 01:06:32 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "builtin.h"
 #include <unistd.h>
 #include <limits.h>
 #include <signal.h>
@@ -59,7 +58,7 @@ static char	*get_exec_path(char **path, char **cmd)
 	}
 	i = 0;
 	found = 0;
-	while (path[i])
+	while (path && path[i])
 	{
 		build_exec_path(exec_path, path[i], cmd[0]);
 		if (validate_exec_path(exec_path, &found, 0) == 0)
@@ -105,8 +104,6 @@ int			exec_cmd(char **path, char **cmd)
 	status = 0;
 	if (cmd == NULL || cmd[0] == NULL)
 		return (0);
-	if (builtin(cmd, &status) == 0)
-		return (status);
 	if ((exec_path = get_exec_path(path, cmd)) == NULL)
 		return (1);
 	status = launch(exec_path, cmd);
