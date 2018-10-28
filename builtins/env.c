@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:51:11 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 13:28:21 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 22:58:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,25 @@
 int			b_env(char **av)
 {
 	extern char	**environ;
-	(void)av;
-	ft_putstrv(environ);
+	char		*str;
+	int			i;
+	int			status;
+
+	if (av[1])
+	{
+		i = 1;
+		status = 0;
+		while (av[i])
+		{
+			str = ft_getenv(av[i++]);
+			if (str == NULL)
+				status = 1;
+			else
+				ft_putendl(str);
+		}
+		return (status);
+	}
+		ft_putstrv(environ);
 	return (0);
 }
 
@@ -53,6 +70,6 @@ int			b_unsetenv(char **av)
 	status = 0;
 	i = 1;
 	while (av[i])
-		status = status || (ft_unsetenv(av[i++]) == -1);
+		status = (ft_unsetenv(av[i++]) == 1) || status;
 	return (status);
 }
