@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 16:04:21 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 20:09:36 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ static char	*get_exec_path(char **path, char **cmd)
 	return (NULL);
 }
 
-void	kill_child_process(int sig)
-{
-	(void)sig;
-}
-
 int		exec_cmd(char **path, char **cmd)
 {
 	extern char **environ;
@@ -100,7 +95,7 @@ int		exec_cmd(char **path, char **cmd)
 	else
 	{
 		free(exec_path);
-		signal(SIGINT, kill_child_process);
+		signal(SIGINT, SIG_IGN);
 		if(waitpid(pid, &status, 0) == -1)
 			return (error("exec_cmd", "cannot wait", 1));
 		signal(SIGINT, SIG_DFL);
