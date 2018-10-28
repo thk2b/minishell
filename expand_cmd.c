@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 20:33:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 00:01:46 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:28:00 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 #include "env.h"
 #include <unistd.h>
 
-int		expand_var(char **str)
+static int	expand_empty(char **str)
+{
+	free(*str);
+	MCK(*str = ft_strdup(""), 1);
+	return (0);
+}
+
+static int	expand_var(char **str)
 {
 	char	*name_start;
 	char	*name_end;
@@ -27,15 +34,10 @@ int		expand_var(char **str)
 		return (1);
 	if ((name_end = ft_strchr(name_start + 1, '$')))
 		*name_end = '\0';
-	val = getenv(name_start + 1);
+	if ((val = getenv(name_start + 1)) == NULL)
+		return (expand_empty(str));
 	if (name_end)
 		*name_end = '$';
-	if (val == NULL)
-	{
-		free(*str);
-		MCK(*str = ft_strdup(""), 1);
-		return (0);
-	}
 	(*str)[name_start - *str] = '\0';
 	MCK(new = ft_strjoin(*str, val), 1);
 	if (name_end && (tmp = new))
@@ -48,7 +50,7 @@ int		expand_var(char **str)
 	return (0);
 }
 
-int		expand_tilde(char **str)
+static int	expand_tilde(char **str)
 {
 	char	*home;
 	char	*new;
@@ -60,7 +62,7 @@ int		expand_tilde(char **str)
 	return (0);
 }
 
-int		expand_cmd(char **cmd)
+int			expand_cmd(char **cmd)
 {
 	int		i;
 

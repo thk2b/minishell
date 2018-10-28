@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 22:04:27 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:29:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,12 @@ static int	teardown(t_hm *vars, char **path)
 	return (0);
 }
 
-int			main(void)
+static void	loop(char **path)
 {
-	t_hm	*vars;
-	char	**path;
-	char	**cmd;
 	int		status;
+	char	**cmd;
 
 	status = 0;
-	path = NULL;
-	vars = NULL;
-	init(&vars, &path);
 	while (1)
 	{
 		prompt(status);
@@ -60,6 +55,17 @@ int			main(void)
 		ft_strvdel(cmd);
 	}
 	ft_strvdel(cmd);
+}
+
+int			main(void)
+{
+	t_hm	*vars;
+	char	**path;
+
+	path = NULL;
+	vars = NULL;
+	init(&vars, &path);
+	loop(path);
 	teardown(vars, path);
 	return (0);
 }

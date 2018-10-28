@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 00:04:42 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:21:08 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,23 @@ static void	build_exec_path(char *dst, char *path, char *exec_name)
 	ft_strlcat(dst, exec_name, PATH_MAX - path_len - 1);
 }
 
-static int	is_path(char *str)
+static int	validate_exec_path(char *name, int *exists, int show_error)
 {
-	return (ft_strchr(str, '/') != NULL);
+	if (access(name, F_OK) == 0)
+	{
+		if (access(name, X_OK) == 0)
+			return (0);
+		*exists = 0;
+		if (show_error)
+			error("permission denied", NULL, 1);
+	}
+	else
+	{
+		*exists = 0;
+		if (show_error)
+			error("command not found", NULL, 1);
+	}
+	return (1);
 }
 
 static char	*get_exec_path(char **path, char **cmd)
@@ -37,29 +51,19 @@ static char	*get_exec_path(char **path, char **cmd)
 	char	exec_path[PATH_MAX];
 	int		found;
 
-	if (is_path(cmd[0]))
+	if (ft_strchr(cmd[0], '/'))
 	{
-		if (access(cmd[0], F_OK) == 0)
-		{
-			if (access(cmd[0], X_OK) == 0)
-				return (ft_strdup(cmd[0]));
-			error("permission denied", NULL, 1);
-		}
-		else
-			error("command not found", NULL, 1);
-		return (NULL);
+		if (validate_exec_path(cmd[0], &found, 1))
+			return (NULL);
+		return (ft_strdup(cmd[0]));
 	}
 	i = 0;
 	found = 0;
 	while (path[i])
 	{
 		build_exec_path(exec_path, path[i], cmd[0]);
-		if (access(exec_path, F_OK) == 0)
-		{
-			found = 1;
-			if (access(exec_path, X_OK) == 0)
-				return (ft_strcjoin(path[i], '/', cmd[0]));
-		}
+		if (validate_exec_path(exec_path, &found, 0) == 0)
+			return (ft_strcjoin(path[i], '/', cmd[0]));
 		i++;
 	}
 	if (found)
@@ -68,12 +72,35 @@ static char	*get_exec_path(char **path, char **cmd)
 	return (NULL);
 }
 
+static int	launch(char *exec_path, char **cmd)
+{
+	extern char	**environ;
+	int			status;
+	pid_t		pid;
+
+	status = 0;
+	if ((pid = fork()) == -1)
+		return (error("cannot fork", NULL, 1));
+	else if (pid == 0)
+	{
+		if (execve(exec_path, cmd, environ))
+			return (error("cannot exec", NULL, 1));
+	}
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		if (waitpid(pid, &status, 0) == -1)
+			return (error("exec_cmd", "cannot wait", 1));
+		signal(SIGINT, SIG_DFL);
+	}
+	return (status);
+}
+
 int			exec_cmd(char **path, char **cmd)
 {
 	extern char	**environ;
 	char		*exec_path;
 	int			status;
-	pid_t		pid;
 
 	status = 0;
 	if (cmd == NULL || cmd[0] == NULL)
@@ -82,23 +109,7 @@ int			exec_cmd(char **path, char **cmd)
 		return (status);
 	if ((exec_path = get_exec_path(path, cmd)) == NULL)
 		return (1);
-	if ((pid = fork()) == -1)
-	{
-		free(exec_path);
-		return (error("cannot fork", NULL, 1));
-	}
-	else if (pid == 0)
-	{
-		if (execve(exec_path, cmd, environ))
-			return (error("cannot exec", NULL, 1));
-	}
-	else
-	{
-		free(exec_path);
-		signal(SIGINT, SIG_IGN);
-		if (waitpid(pid, &status, 0) == -1)
-			return (error("exec_cmd", "cannot wait", 1));
-		signal(SIGINT, SIG_DFL);
-	}
+	status = launch(exec_path, cmd);
+	free(exec_path);
 	return (status);
 }
