@@ -14,6 +14,7 @@ SRC =\
 	prompt.c\
 	path.c\
 	read_cmd.c\
+	expand_cmd.c\
 	exec_cmd.c\
 	main.c\
 

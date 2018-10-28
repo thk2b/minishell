@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 13:02:44 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 20:33:14 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**get_path(char **env);
 int		error(const char *predicate, const char *subject, int ret);
 int		prompt(int status);
 char	**read_cmd(void);
+int		expand_cmd(char **cmd);
 int		exec_cmd(char **path, char **cmd);
 
 #endif

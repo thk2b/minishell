@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 19:58:32 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 20:32:49 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int			main(void)
 		}
 		if (ft_strcmp(cmd[0], "exit") == 0)
 			break ;
-		status = exec_cmd(path, cmd);
+		if (expand_cmd(cmd) == 0)
+			status = exec_cmd(path, cmd);
 		ft_strvdel(cmd);
 	}
 	ft_strvdel(cmd);
