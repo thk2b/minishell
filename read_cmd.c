@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 18:55:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 15:33:19 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 19:56:53 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #include "libft.h"
 #include <unistd.h>
 #include <signal.h>
-#include <printf.h>
 
-void	handler(int sig)
+void	handle_interupt(int sig)
 {
 	(void)sig;
+	ft_putchar('\n');
+	prompt(0);
 }
 
 char	**read_cmd(void)
@@ -27,18 +28,18 @@ char	**read_cmd(void)
 	char	*line;
 	char	**cmd;
 
-	signal(SIGINT, handler);
+	signal(SIGINT, handle_interupt);
 	if (get_next_line(0, &line) != 1)
 	{
 		error("cannot read", NULL, 0);
 		return (NULL);
 	}
+	signal(SIGINT, SIG_DFL);
 	if((cmd = ft_strsplit_escape(line, ' ', "\"\'")) == NULL)
 	{
 		error("cannot split", NULL, 0);
 		return (NULL);
 	}
-	signal(SIGINT, SIG_DFL);
 	free(line);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 15:43:34 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/27 19:58:32 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "libft.h"
 #include "hash_map.h"
 #include <unistd.h>
-#include <printf.h>
-
 
 static int	init(t_hm **vars, char ***path)
 {
@@ -50,6 +48,8 @@ int			main(void)
 		prompt(status);
 		if ((cmd = read_cmd()) == NULL || cmd[0] == NULL)
 		{
+			if (cmd[0] == NULL)
+				free(cmd);
 			status = 0;
 			continue ;
 		}
