@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 23:32:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 13:29:10 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/29 23:03:42 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		builtin(char **av, int *status)
 	static t_builtin	builtins[] = {
 		{"exit", b_exit},
 		{"cd", b_cd},
-		{"eecho", b_echo},
+		{"echo", b_echo},
 		{"env", b_env},
 		{"setenv", b_setenv},
 		{"unsetenv", b_unsetenv},

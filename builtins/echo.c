@@ -6,32 +6,50 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 12:52:24 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 00:04:50 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/29 23:04:04 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "libft.h"
 
-int		b_echo(char **av)
+static int	get_n_opt(char **av, int *i)
 {
-	char	**words;
+	if (av[1] == NULL)
+		return (1);
+	if (av[1][0] == '-')
+	{
+		(*i)++;
+		if (av[1][1] == 'n')
+			return (0);
+	}
+	return (1);
+}
+
+int			b_echo(char **av)
+{
 	int		i;
+	int		first;
+	int		display_nl;
 
 	if (av == NULL || av[0] == NULL)
 		return (1);
-	if (av[1])
+	i = 1;
+	first = 0;
+	display_nl = get_n_opt(av, &i);
+	if (av[i])
 	{
-		MCK(words = ft_strsplit_escape(av[1], ' ', "\"\'"), 1);
-		i = 0;
-		while (words[i])
+		while (av[i])
 		{
-			if (i)
+			if (first == 0)
+				first = 1;
+			else
 				ft_putchar(' ');
-			ft_putstr(words[i]);
+			ft_putstr(av[i]);
+			i++;
 		}
-		ft_strvdel(words);
 	}
-	ft_putchar('\n');
+	if (display_nl)
+		ft_putchar('\n');
 	return (0);
 }
