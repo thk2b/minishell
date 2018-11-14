@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:15:31 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/14 00:13:13 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	init(char ***path)
 
 static int	teardown(char ***path)
 {
-	ft_strvdel(*path);
+	if (*path)
+		ft_strvdel(*path);
 	return (0);
 }
 
