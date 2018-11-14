@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 21:43:24 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:48:02 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/14 15:42:13 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	handle_char(t_line *line, char c)
 {
+	if (c == '\t')
+		return (0);
 	if (c == 27)
 		return (handle_escape(line));
 	if (c == 127)
