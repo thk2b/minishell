@@ -6,12 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 18:55:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:45:17 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 23:52:41 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <printf.h> //tmp
 
 void		handle_interupt(int sig)
 {
