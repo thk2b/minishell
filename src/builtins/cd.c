@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 12:42:40 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/27 23:26:54 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/14 15:14:53 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "env.h"
 #include <unistd.h>
 #include <limits.h>
+#include <printf.h>
 
 int	b_cd(char **av)
 {
@@ -29,7 +30,7 @@ int	b_cd(char **av)
 	}
 	MCK(curpwd = ft_getenv("PWD"), 1);
 	if (ft_setenv("OLD_PWD", curpwd, 1))
-		return (1);
+		;
 	if (chdir(dst) == -1)
 		return (1);
 	if ((curpwd = getcwd(NULL, 0)) == NULL)
