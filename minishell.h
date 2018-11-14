@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 16:03:07 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 16:49:01 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		exec_cmd(char **path, char **cmd);
 
 # define DIR_UP 'A'
 # define DIR_DOWN 'B'
-# define DIR_LEFT 'C'
-# define DIR_RIGHT 'D'
+# define DIR_RIGHT 'C'
+# define DIR_LEFT 'D'
 
 int		cursor_move(char dir);
 int		cursor_putchar(char c);

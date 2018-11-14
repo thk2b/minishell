@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:38:58 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 15:58:07 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 16:52:13 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int		cursor_move(char dir)
 	else if (dir == DIR_DOWN)
 		;
 	else if (dir == DIR_LEFT)
-		return (puttc("nd"));
-	else if (dir == DIR_RIGHT)
 		return (puttc("le"));
+	else if (dir == DIR_RIGHT)
+		return (puttc("nd"));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:27:03 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 13:32:07 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:14:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 int		puttc(char *name)
 {
-	char	buf[32];
+	char	tname[1024] = {0};
+	char	buf[32] = {0};
 	char	*cap;
 
-	MCK(cap = tgetstr(name, (char**)&buf), 1);
-	ft_putstr(cap);
+	ft_bzero(buf, 32);
+	ft_bzero(tname, 1024);
+	if (tgetent(tname, getenv("TERM")) != 1)
+		return (1);
+	cap = tgetstr(name, (char**)&buf);
+	if (cap)
+		ft_putstr(cap);
 	return (0);
 }
