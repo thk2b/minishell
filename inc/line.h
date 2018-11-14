@@ -6,13 +6,13 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 21:33:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:37:22 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/14 11:30:42 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LINE_H
 # define LINE_H
-# define LINE_BUFSIZE 10
+# define LINE_BUFSIZE 48
 # include <stdlib.h>
 
 struct			s_cursor

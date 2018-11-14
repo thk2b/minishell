@@ -2,7 +2,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 INCLUDES = -I ./libft/includes -I ./inc
 
 HEAD = $(addprefix inc/, buitin.h minishell.h)
