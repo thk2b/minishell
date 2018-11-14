@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:38:58 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 16:52:13 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:23:19 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		cursor_putchar(char c)
 
 int		cursor_delchar(void)
 {
-	puttc("le"); // depends on position ?
+	puttc("le");
 	puttc("dc");
 	return (0);
 }

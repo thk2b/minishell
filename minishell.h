@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 16:49:01 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:26:53 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # define PROMPT_OK "\e[1;32m"
 # define PROMPT_ERR "\e[1;31m"
 
-int		init_term(void);
-char	**get_path(void);
-int		error(const char *predicate, const char *subject, int ret);
-int		prompt(int status);
-char	**read_cmd(void);
-int		expand_cmd(char **cmd);
-int		exec_cmd(char **path, char **cmd);
+int				init_term(void);
+char			**get_path(void);
+int				error(const char *predicate, const char *subject, int ret);
+int				prompt(int status);
+char			**read_cmd(void);
+int				expand_cmd(char **cmd);
+int				exec_cmd(char **path, char **cmd);
 
 /*
 **	cursor.c
@@ -42,9 +42,9 @@ int		exec_cmd(char **path, char **cmd);
 # define DIR_RIGHT 'C'
 # define DIR_LEFT 'D'
 
-int		cursor_move(char dir);
-int		cursor_putchar(char c);
-int		cursor_delchar(void);
+int				cursor_move(char dir);
+int				cursor_putchar(char c);
+int				cursor_delchar(void);
 
 /*
 **	line.c
@@ -77,6 +77,6 @@ char			*line_render(t_line *l);
 **	termcaps_utils.c
 */
 
-int		puttc(char *name);
+int				puttc(char *name);
 
 #endif

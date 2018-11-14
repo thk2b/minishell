@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:24:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 16:34:26 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:27:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int	init_term(void)
 	term.c_lflag &= ~ICANON;
 	if (tcsetattr(0, TCSAFLUSH, &term) == -1)
 		return (1);
-	setbuf(stdout, NULL); //tmp
 	return (0);
 }

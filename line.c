@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:38:35 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 20:17:06 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:27:58 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		line_resize(t_line *l)
 	size_t	old_cursor_end;
 	size_t	old_end_size;
 
-	old_end_size = l->bufsize - l->cursor.end + 1; // correct?
+	old_end_size = l->bufsize - l->cursor.end + 1;
 	MCK(buf = (char*)malloc(sizeof(char) * (1 + l->bufsize * 2)), 1);
 	ft_memcpy(buf, l->buf, l->cursor.start + 1);
 	old_cursor_end = l->cursor.end;

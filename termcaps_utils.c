@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:27:03 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 20:14:37 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 20:24:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		puttc(char *name)
 {
-	char	tname[1024] = {0};
-	char	buf[32] = {0};
+	char	tname[1024];
+	char	buf[32];
 	char	*cap;
 
 	ft_bzero(buf, 32);
