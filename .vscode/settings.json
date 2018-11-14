@@ -10,6 +10,7 @@
 		"typeinfo": "c",
 		"env.h": "c",
 		"types.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"line.h": "c"
 	}
 }

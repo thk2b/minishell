@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:46:24 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 21:59:26 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				exec_cmd(char **path, char **cmd);
 
 int				handle_character(t_line *line, char c);
 int				handle_arrow(t_line *line, char c);
+int				handle_word_arrow(t_line *line, char c);
 int				handle_escape(t_line *line);
 int				handle_backspace(t_line *line);
 int				handle_char(t_line *line, char c);
@@ -54,6 +55,7 @@ int				handle_char(t_line *line, char c);
 # define DIR_LEFT 'D'
 
 int				cursor_move(char dir);
+int				cursor_move_word(char dir);
 int				cursor_putchar(char c);
 int				cursor_delchar(void);
 

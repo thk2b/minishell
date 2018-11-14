@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 21:33:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 21:37:22 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 22:27:19 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LINE_H
 # define LINE_BUFSIZE 10
 # include <stdlib.h>
+# ifndef ISWS
+#  define ISWS(c) ((c) == ' ' || (c) == '\t')
+# endif
 
 struct			s_cursor
 {
@@ -35,6 +38,8 @@ int				line_append(t_line *l, char c);
 int				line_delete(t_line *l);
 int				line_move_left(t_line *l);
 int				line_move_right(t_line *l);
+int				line_move_left_word(t_line *l);
+int				line_move_right_word(t_line *l);
 char			*line_render(t_line *l);
 
 #endif
