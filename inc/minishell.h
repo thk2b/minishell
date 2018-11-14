@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 20:21:32 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/13 20:26:53 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 21:46:24 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "line.h"
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <unistd.h>
@@ -34,6 +35,16 @@ int				expand_cmd(char **cmd);
 int				exec_cmd(char **path, char **cmd);
 
 /*
+**	character_handlers.c
+*/
+
+int				handle_character(t_line *line, char c);
+int				handle_arrow(t_line *line, char c);
+int				handle_escape(t_line *line);
+int				handle_backspace(t_line *line);
+int				handle_char(t_line *line, char c);
+
+/*
 **	cursor.c
 */
 
@@ -45,33 +56,6 @@ int				exec_cmd(char **path, char **cmd);
 int				cursor_move(char dir);
 int				cursor_putchar(char c);
 int				cursor_delchar(void);
-
-/*
-**	line.c
-*/
-
-# define LINE_BUFSIZE 128
-
-struct			s_cursor
-{
-	unsigned int	start;
-	unsigned int	end;
-};
-
-typedef struct	s_line
-{
-	char			*buf;
-	unsigned int	bufsize;
-	struct s_cursor	cursor;
-}				t_line;
-
-t_line			*line_new(void);
-void			line_free(t_line *l);
-int				line_append(t_line *l, char c);
-int				line_delete(t_line *l);
-int				line_move_left(t_line *l);
-int				line_move_right(t_line *l);
-char			*line_render(t_line *l);
 
 /*
 **	termcaps_utils.c
