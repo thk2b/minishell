@@ -6,17 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 18:55:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/11/12 16:41:12 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 16:01:53 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include <unistd.h>
-#include <signal.h>
-#include <sys/ioctl.h>
-#include <termios.h>
 #include <printf.h> //tmp
 
 void		handle_interupt(int sig)
@@ -26,33 +20,76 @@ void		handle_interupt(int sig)
 	prompt(0);
 }
 
-static int	init_term(void)
-{
-	struct termios	term;
+static int	handle_char(t_line *line, char c); //tmp
 
-	if (tcgetattr(0, &term) == -1)
-		return (1);
-	term.c_lflag &= ~ECHO;
-	term.c_lflag &= ~ICANON;
-	if (tcsetattr(0, TCSAFLUSH, &term) == -1)
-		return (1);
+static int	handle_arrow(t_line *line, char c)
+{
+	if (c == 'C')
+	{
+		line_move_left(line);
+		cursor_move(c);
+	}
+	else if (c == 'D')
+	{
+		line_move_right(line);
+		cursor_move(c);
+	}
 	return (0);
 }
 
-static int	read_line(int fd, char **line)
+static int	handle_escape(t_line *line)
 {
-	char	buf[100] = {0};
-	int		cur;
+	char	c;
 
-	cur = 0;
-	while (read(fd, buf + cur, 1))
+	if (read(0, &c, 1) != 1)
+		return (1);
+	if (c != 91)
+		return (handle_char(line, c));
+	if (read(0, &c, 1) != 1)
+		return (1);
+	if (ft_strchr("ABCD", c))
+		return (handle_arrow(line, c));
+	return (handle_char(line, c));
+}
+
+static int	handle_backspace(t_line *line)
+{
+	if (line_delete(line))
+		return (1);
+	return (cursor_delchar());
+}
+
+static int	handle_char(t_line *line, char c)
+{
+	printf("%d,", c);
+	if (c == 27)
+		return (handle_escape(line));
+	if (c == 127)
+		return (handle_backspace(line));
+	if (c == '\n')
+		return (-1);
+	line_append(line, c);
+	cursor_putchar(c);
+	return (0);
+}
+
+static int	read_line(int fd, char **linep)
+{
+	t_line	*line;
+	int		ret;
+	char	c;
+
+	MCK(line = line_new(), 1);
+	while (read(fd, &c, 1))
 	{
-		write(1, buf + cur, 1);
-		if (buf[cur] == '\n')
+		if ((ret = handle_char(line, c)) == -1)
 			break ;
-		cur++;
+		else if (ret)
+			return (1);
 	}
-	return ((*line = ft_strndup(buf, cur)) == NULL);
+	MCK(*linep = line_render(line), 1);
+	line_free(line);
+	return (0);
 }
 
 char		**read_cmd(void)

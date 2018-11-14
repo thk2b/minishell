@@ -11,6 +11,10 @@ BUILTINS_SRC = $(addprefix builtins/, builtin.c env.c exit.c echo.c cd.c)
 SRC =\
 	$(BUILTINS_SRC)\
 	error.c\
+	init_term.c \
+	termcaps_utils.c\
+	cursor.c\
+	line.c\
 	prompt.c\
 	path.c\
 	read_cmd.c\
@@ -26,7 +30,7 @@ $(LIBFT):
 	make -C libft
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -lcurses -o $(NAME)
 
 %.o: %.c $(HEAD)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@

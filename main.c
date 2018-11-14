@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:15:07 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/29 22:54:24 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 11:26:35 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	init(char ***path)
 
 	MCK(environ = ft_strv_dup(environ), 1);
 	MCK(*path = get_path(), 1);
-	return (0);
+	return (init_term());
 }
 
 static int	teardown(char ***path)
