@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:23:59 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/29 23:05:50 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/13 23:46:33 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_getenvp(const char *name)
 	return (NULL);
 }
 
-int		t_setenv(const char *name, const char *value, int overwrite)
+int		ft_setenv(const char *name, const char *value, int overwrite)
 {
 	char	**current;
 	char	*str;
