@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 19:06:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/28 01:06:32 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/11/14 13:56:05 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	launch(char *exec_path, char **cmd)
 	else if (pid == 0)
 	{
 		if (execve(exec_path, cmd, environ))
-			return (error("cannot exec", NULL, 1));
+			_exit(error("cannot exec", NULL, 1));
 	}
 	else
 	{
